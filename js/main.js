@@ -13,6 +13,7 @@ const gameBoardEl = document.getElementById('game-board')
 const submitBtnEl = document.getElementById('Submit')
 const resetBtnEl = document.getElementById('reset')
 const startBtnEl = document.getElementById('start')
+const memorySeqEl = document.getElementById('memory-sequence')
 
 /*----- event listeners -----*/
 
@@ -24,6 +25,7 @@ startBtnEl.addEventListener('click', gameInit)
 function gameInit() {
     solution = ["","","",""]
     currentGuess = []
+    turns = 0
     getSolution()
 }
 
@@ -36,15 +38,23 @@ function getSolution() {
 
 
 function renderSolution() {
-    console.log('renderSolutionFunc')
+    console.log(memorySeqEl)
 
 }
 
 function logCurrentGuess(evt) {
-    currentGuess.push(evt.target.id) 
-    console.log(currentGuess)
-    //add 1 to guess index
+    if (currentGuess.length === 4) {
+        console.log('you cant do that')
+    }
+    else {
+        currentGuess.push(evt.target.id) 
+        console.log(currentGuess)
+    }
+    
+    
 }
+
+
 
 
 
