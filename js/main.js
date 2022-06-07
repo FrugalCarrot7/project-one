@@ -18,7 +18,7 @@ const memorySeqEl = document.getElementById('memory-sequence')
 /*----- event listeners -----*/
 
 gameBoardEl.addEventListener('click', logCurrentGuess)
-startBtnEl.addEventListener('click', gameInit)
+startBtnEl.addEventListener('click', gameStart)
 
 /*----- functions -----*/
 
@@ -26,7 +26,7 @@ function gameInit() {
     solution = ["","","",""]
     currentGuess = []
     turns = 0
-    getSolution()
+    
 }
 
 function getSolution() {
@@ -39,6 +39,8 @@ function getSolution() {
 
 function renderSolution() {
     
+    memorySeqEl.innerText = 
+    `please remember this ${solution[0]} ${solution[1]} ${solution[2]} ${solution[3]}`
 
 }
 
@@ -52,6 +54,12 @@ function logCurrentGuess(evt) {
     }
     
     
+}
+
+function gameStart() {
+    getSolution()
+    console.log(solution)
+    renderSolution()
 }
 
 
