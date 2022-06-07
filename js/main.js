@@ -38,7 +38,7 @@ function getSolution() {
 
 
 function renderSolution() {
-    console.log(memorySeqEl)
+    
 
 }
 
