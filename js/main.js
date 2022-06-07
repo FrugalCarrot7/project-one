@@ -25,5 +25,20 @@ function gameInit() {
     solution = ["","","",""]
     currentGuess = []
     console.log(solution)
+    getSolution()
 }
 
+function getSolution() {
+    for (let i=0; i<4; i++){
+        let randomInt = Math.floor(Math.random()*4 + 1)
+        solution[i] = randomInt
+    }
+}
+
+function logCurrentGuess() {
+    console.log('lcgfunc')
+}
+
+gameInit()
+
+console.log(solution)
