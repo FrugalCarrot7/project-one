@@ -5,7 +5,7 @@ const CHOICES = 4
 
 /*----- app's state (variables) -----*/
 
-let solution, currentGuess;
+let solution, currentGuess, turns;
 
 /*----- cached element references -----*/
 
@@ -24,7 +24,6 @@ startBtnEl.addEventListener('click', gameInit)
 function gameInit() {
     solution = ["","","",""]
     currentGuess = []
-    console.log(solution)
     getSolution()
 }
 
@@ -35,9 +34,20 @@ function getSolution() {
     }
 }
 
-function logCurrentGuess() {
-    console.log('lcgfunc')
+
+function renderSolution() {
+    console.log('renderSolutionFunc')
+
 }
+
+function logCurrentGuess(evt) {
+    currentGuess.push(evt.target.id) 
+    console.log(currentGuess)
+    //add 1 to guess index
+}
+
+
+
 
 gameInit()
 
