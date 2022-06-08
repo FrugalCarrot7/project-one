@@ -10,7 +10,7 @@ let solution, currentGuess, turns, color, answer;
 /*----- cached element references -----*/
 
 const gameBoardEl = document.getElementsByClassName('colors')
-const submitBtnEl = document.getElementById('Submit')
+const submitBtnEl = document.getElementById('submit')
 const resetBtnEl = document.getElementById('reset')
 const startBtnEl = document.getElementById('start')
 const memorySeqEl = document.getElementById('memory-sequence')
@@ -22,10 +22,8 @@ const winMsgEl = document.getElementById('win-message')
 Array.from(gameBoardEl).forEach((color) => {
     color.addEventListener('click', logCurrentGuess)
 })
-
-
-
 startBtnEl.addEventListener('click', gameStart)
+submitBtnEl.addEventListener('click', checkGuess)
 
 /*----- functions -----*/
 
@@ -74,16 +72,12 @@ function renderCurrentGuess() {
 }
 
 function checkGuess() {
-    console.log(currentGuess)
     convertCurrentGuess()
-    console.log(answer)
-    if(answer === solution) {
-        console.log('chicken dinner')
+    if(answer[0] == solution[0] && answer[1] == solution[1] && answer[2] == solution[2] && answer[3] == solution[3]) {
+        winMsgEl.innerText = `Smarty Pants`
     }
     else {
-        console.log('did we win?')
-        console.log(answer)
-        console.log(solution)
+        winMsgEl.innerText = `Goldfish`
     }
 }
 
