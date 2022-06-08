@@ -5,19 +5,26 @@ const CHOICES = 4
 
 /*----- app's state (variables) -----*/
 
-let solution, currentGuess, turns;
+let solution, currentGuess, turns, color;
 
 /*----- cached element references -----*/
 
-const gameBoardEl = document.getElementById('game-board')
+const gameBoardEl = document.getElementsByClassName('colors')
 const submitBtnEl = document.getElementById('Submit')
 const resetBtnEl = document.getElementById('reset')
 const startBtnEl = document.getElementById('start')
 const memorySeqEl = document.getElementById('memory-sequence')
+const winMsgEl = document.getElementById('win-message')
 
 /*----- event listeners -----*/
 
-gameBoardEl.addEventListener('click', logCurrentGuess)
+
+Array.from(gameBoardEl).forEach((color) => {
+    color.addEventListener('click', logCurrentGuess)
+})
+
+
+
 startBtnEl.addEventListener('click', gameStart)
 
 /*----- functions -----*/
@@ -38,7 +45,7 @@ function getSolution() {
 
 
 function renderSolution() {
-    
+
     memorySeqEl.innerText = 
     `please remember this ${solution[0]} ${solution[1]} ${solution[2]} ${solution[3]}`
 
@@ -49,8 +56,8 @@ function logCurrentGuess(evt) {
         console.log('you cant do that')
     }
     else {
-        currentGuess.push(evt.target.id) 
-        console.log(currentGuess)
+        currentGuess.push(evt.target.innerText)
+        renderCurrentGuess()
     }
     
     
@@ -60,6 +67,10 @@ function gameStart() {
     getSolution()
     console.log(solution)
     renderSolution()
+}
+
+function renderCurrentGuess() {
+    winMsgEl.innerText = `this is your current guess ${currentGuess}`
 }
 
 
