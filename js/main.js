@@ -5,7 +5,7 @@ const CHOICES = 4
 
 /*----- app's state (variables) -----*/
 
-let solution, currentGuess, turns, color;
+let solution, currentGuess, turns, color, answer;
 
 /*----- cached element references -----*/
 
@@ -73,7 +73,26 @@ function renderCurrentGuess() {
     winMsgEl.innerText = `this is your current guess ${currentGuess}`
 }
 
+function checkGuess() {
+    console.log(currentGuess)
+    convertCurrentGuess()
+    console.log(answer)
+    if(answer === solution) {
+        console.log('chicken dinner')
+    }
+    else {
+        console.log('did we win?')
+        console.log(answer)
+        console.log(solution)
+    }
+}
 
+function convertCurrentGuess() {
+    answer = []
+    currentGuess.forEach((num) => {
+    answer.push(parseInt(num))    
+    } )
+}
 
 
 
