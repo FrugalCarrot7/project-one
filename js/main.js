@@ -5,7 +5,7 @@ const CHOICES = 4
 
 /*----- app's state (variables) -----*/
 
-let solution, currentGuess, turns, color, answer;
+let solution, currentGuess, color, answer;
 
 /*----- cached element references -----*/
 
@@ -28,9 +28,7 @@ submitBtnEl.addEventListener('click', checkGuess)
 /*----- functions -----*/
 
 function gameInit() {
-    solution = ["","","",""]
-    currentGuess = []
-    turns = 0
+    
     
 }
 
@@ -51,7 +49,7 @@ function renderSolution() {
 
 function logCurrentGuess(evt) {
     if (currentGuess.length === 4) {
-        console.log('you cant do that')
+        winMsgEl.innerText = `this is your current guess ${currentGuess} you cant do that!`
     }
     else {
         currentGuess.push(evt.target.innerText)
@@ -62,6 +60,8 @@ function logCurrentGuess(evt) {
 }
 
 function gameStart() {
+    solution = ["","","",""]
+    currentGuess = []
     getSolution()
     console.log(solution)
     renderSolution()
