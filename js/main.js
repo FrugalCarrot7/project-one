@@ -24,6 +24,7 @@ Array.from(gameBoardEl).forEach((color) => {
 })
 startBtnEl.addEventListener('click', gameStart)
 submitBtnEl.addEventListener('click', checkGuess)
+resetBtnEl.addEventListener('click', deleteCurrentGuess)
 
 /*----- functions -----*/
 
@@ -86,6 +87,11 @@ function convertCurrentGuess() {
     currentGuess.forEach((num) => {
     answer.push(parseInt(num))    
     } )
+}
+
+function deleteCurrentGuess() {
+    currentGuess = []
+    renderCurrentGuess()
 }
 
 
