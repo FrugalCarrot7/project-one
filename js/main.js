@@ -66,6 +66,8 @@ function gameStart() {
     getSolution()
     console.log(solution)
     renderSolution()
+    setTimeout( vanish, 5000)
+
 }
 
 function renderCurrentGuess() {
@@ -94,9 +96,10 @@ function deleteCurrentGuess() {
     renderCurrentGuess()
 }
 
+function vanish() {
+    memorySeqEl.innerText = `Times Up`
+}
 
 
-
-gameInit()
 
 console.log(solution)
