@@ -15,6 +15,7 @@ const resetBtnEl = document.getElementById('reset')
 const startBtnEl = document.getElementById('start')
 const memorySeqEl = document.getElementById('memory-sequence')
 const winMsgEl = document.getElementById('win-message')
+const solSeqEl = document.getElementById('solution-sequence')
 
 /*----- event listeners -----*/
 
@@ -42,11 +43,26 @@ function getSolution() {
 
 
 function renderSolution() {
-
-    memorySeqEl.innerText = 
-    `please remember this ${solution[0]} ${solution[1]} ${solution[2]} ${solution[3]}`
-
+    solution.forEach(function(num){
+        if(num === 1) {
+            solSeqEl.innerHTML +=  '<div class="solution" id="red">1</div>'
+            console.log(solSeqEl.innerHTML)
+        }if(num === 2){
+            solSeqEl.innerHTML +=  '<div class="solution" id="green">2</div>'
+            console.log(solSeqEl.innerHTML)
+        }if(num === 3){
+            solSeqEl.innerHTML +=  '<div class="solution" id="blue">3</div>'
+            console.log(solSeqEl.innerHTML)
+        }if(num === 4){
+            solSeqEl.innerHTML +=  '<div class="solution" id="yellow">4</div>'
+            console.log(solSeqEl.innerHTML)
+        }else {
+            console.log('what happened')
+        }
+    })
 }
+
+
 
 function logCurrentGuess(evt) {
     if (currentGuess.length === 4) {
@@ -61,13 +77,13 @@ function logCurrentGuess(evt) {
 }
 
 function gameStart() {
+    memorySeqEl.innerText = "Remember this pattern"
     solution = ["","","",""]
     currentGuess = []
     getSolution()
     console.log(solution)
     renderSolution()
     setTimeout( vanish, 5000)
-
 }
 
 function renderCurrentGuess() {
@@ -77,10 +93,10 @@ function renderCurrentGuess() {
 function checkGuess() {
     convertCurrentGuess()
     if(answer[0] == solution[0] && answer[1] == solution[1] && answer[2] == solution[2] && answer[3] == solution[3]) {
-        winMsgEl.innerText = `Smarty Pants`
+        winMsgEl.innerText = `Correct`
     }
     else {
-        winMsgEl.innerText = `Goldfish`
+        winMsgEl.innerText = `Wrong`
     }
 }
 
@@ -97,7 +113,8 @@ function deleteCurrentGuess() {
 }
 
 function vanish() {
-    memorySeqEl.innerText = `Times Up`
+    memorySeqEl.innerText = `Can you remember the code?`
+    solSeqEl.innerText = "Press the buttons below"
 }
 
 

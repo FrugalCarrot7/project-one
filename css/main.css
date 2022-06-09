@@ -12,6 +12,11 @@ h1 {
     margin: auto;
     margin-top: 20px;
 }
+#solution-sequence {
+    display: flex;
+    margin: auto;
+    margin-top: 20px;
+}
 
 #game-board {
     margin: auto;
@@ -89,4 +94,29 @@ h1 {
 
 p {
     margin: auto;
+}
+
+.solution {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+#red {
+    background-color: red;
+}
+
+#green {
+    background-color: lightgreen;
+}
+
+#blue {
+    background-color: blue;
+}
+
+#yellow {
+    background-color: yellow;
 }
