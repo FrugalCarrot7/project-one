@@ -1,9 +1,23 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    margin: auto;
+    margin-top: 20px;
+}
+
+#memory-sequence {
+    margin: auto;
+    margin-top: 20px;
+}
+
 #game-board {
-    border: 2px solid blue;
-    height: 300px;
-    width: 300px;
+    margin: auto;
+    height: 500px;
+    width: 500px;
     display: grid;
-    align-items: center;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     grid-column-gap: 0px;
@@ -11,12 +25,18 @@
 }
 
 .colors {
+    margin: auto;
     display: flex;
     justify-content: center;
     height: 80px;
     width: 80px;
     border: 2px solid black;
     border-radius: 15px;
+}
+
+.colors:hover {
+    font-size: 30px;
+    border: 5px solid black;
 }
     
 #div1 { 
@@ -39,18 +59,34 @@
     height: 90px;
     width: 90px;
     text-align: center;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 25px;
-    margin: 5px;
+    margin: auto;
     background: magenta;
     border: 2px solid black;
     border-radius: 180px;
     grid-area: 2 / 2 / 3 / 3;
 }
 
+#win-message {
+    margin: auto;
+}
+
 #submit {
+    margin: auto;
+    height: 25px;
+    width: 60px;
     margin-top: 15px;
     padding: 5px;
     background: red;
     color: white;
+}
+
+#reset {
+    position: absolute;
+    right: 10px; 
+    bottom: 10px;
+}
+
+p {
+    margin: auto;
 }
