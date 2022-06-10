@@ -66,10 +66,7 @@ function logCurrentGuess(evt) {
     else {
         currentGuess.push(evt.target.innerText)
         renderCurrentGuess()
-    }
-    
-    
-    
+    }    
 }
 function renderCurrentGuess() {
     curGuesEl.innerText = `YOUR GUESS ${currentGuess}`
@@ -88,10 +85,8 @@ function checkGuess() {
         curGuesEl.innerText = `Wrong. Try again by pressing Start`
         loss += 1
     }
-
     Array.from(gameBoardEl).forEach((color) => {
         color.removeEventListener('click', logCurrentGuess)
-
     })
     solSeqEl.innerText = ``
     checkWin()
@@ -128,6 +123,5 @@ function reset() {
     renderCurrentGuess()
     startBtnEl.addEventListener('click', gameStart)
     submitBtnEl.addEventListener('click', checkGuess)
-
 }
 gameInit()
