@@ -1,11 +1,11 @@
 /*----- constants -----*/
-
+const WINNING = 3
 const FAILEDGUESSES = 3
-const CHOICES = 4
+
 
 /*----- app's state (variables) -----*/
 
-let solution, currentGuess, color, answer;
+let solution, currentGuess, color, answer, wins, loss;
 
 /*----- cached element references -----*/
 
@@ -16,23 +16,32 @@ const startBtnEl = document.getElementById('start')
 const memorySeqEl = document.getElementById('memory-sequence')
 const winMsgEl = document.getElementById('win-message')
 const solSeqEl = document.getElementById('solution-sequence')
+const curGuesEl = document.getElementById('current-guess')
 
 /*----- event listeners -----*/
 
 
-Array.from(gameBoardEl).forEach((color) => {
-    color.addEventListener('click', logCurrentGuess)
-})
+
 startBtnEl.addEventListener('click', gameStart)
 submitBtnEl.addEventListener('click', checkGuess)
-resetBtnEl.addEventListener('click', deleteCurrentGuess)
+resetBtnEl.addEventListener('click', reset)
 
 /*----- functions -----*/
-
 function gameInit() {
-    
-    
+    wins = 0
+    loss = 0
 }
+function gameStart() {
+    Array.from(gameBoardEl).forEach((color) => {
+        color.addEventListener('click', logCurrentGuess)})
+    memorySeqEl.innerText = "Remember this pattern"
+    solution = ["","","",""]
+    currentGuess = []
+    getSolution()
+    renderSolution()
+    setTimeout( vanish, 5000)
+}
+
 
 function getSolution() {
     for (let i=0; i<4; i++){
@@ -46,27 +55,22 @@ function renderSolution() {
     solution.forEach(function(num){
         if(num === 1) {
             solSeqEl.innerHTML +=  '<div class="solution" id="red">1</div>'
-            console.log(solSeqEl.innerHTML)
         }if(num === 2){
             solSeqEl.innerHTML +=  '<div class="solution" id="green">2</div>'
-            console.log(solSeqEl.innerHTML)
         }if(num === 3){
             solSeqEl.innerHTML +=  '<div class="solution" id="blue">3</div>'
-            console.log(solSeqEl.innerHTML)
         }if(num === 4){
-            solSeqEl.innerHTML +=  '<div class="solution" id="yellow">4</div>'
-            console.log(solSeqEl.innerHTML)
-        }else {
-            console.log('what happened')
+            solSeqEl.innerHTML +=  '<div class="solution" id="yellow">4</div>'   
         }
     })
 }
 
 
 
+
 function logCurrentGuess(evt) {
     if (currentGuess.length === 4) {
-        winMsgEl.innerText = `this is your current guess ${currentGuess} you cant do that!`
+        curGuesEl.innerText = `this is your current guess ${currentGuess} you cant do that!`
     }
     else {
         currentGuess.push(evt.target.innerText)
@@ -74,29 +78,46 @@ function logCurrentGuess(evt) {
     }
     
     
+    
 }
 
-function gameStart() {
-    memorySeqEl.innerText = "Remember this pattern"
-    solution = ["","","",""]
-    currentGuess = []
-    getSolution()
-    console.log(solution)
-    renderSolution()
-    setTimeout( vanish, 5000)
-}
+
 
 function renderCurrentGuess() {
-    winMsgEl.innerText = `this is your current guess ${currentGuess}`
+    curGuesEl.innerText = `YOUR GUESS ${currentGuess}`
 }
 
 function checkGuess() {
     convertCurrentGuess()
-    if(answer[0] == solution[0] && answer[1] == solution[1] && answer[2] == solution[2] && answer[3] == solution[3]) {
-        winMsgEl.innerText = `Correct`
+    if(answer[0] == solution[0] && 
+        answer[1] == solution[1] && answer[2] == solution[2] && answer[3] == solution[3]) {
+        curGuesEl.innerText = `Correct`
+        memorySeqEl.innerText = `Press Start for another code`
+        wins += 1
     }
     else {
-        winMsgEl.innerText = `Wrong`
+        curGuesEl.innerText = `Wrong. Try again by pressing Start`
+        loss += 1
+    }
+
+    Array.from(gameBoardEl).forEach((color) => {
+        color.removeEventListener('click', logCurrentGuess)
+
+    })
+    solSeqEl.innerText = ``
+    checkWin()
+}
+
+function checkWin() {
+    if(wins === WINNING) {
+        winMsgEl.innerText = `YOU WIN!`
+        startBtnEl.removeEventListener('click', gameStart)
+    }
+    if(loss === FAILEDGUESSES){
+        winMsgEl.innerText = `IM NOT MAD IM JUST DISAPPOINTED`
+        curGuesEl.innerText = ``
+        startBtnEl.removeEventListener('click', gameStart)
+        submitBtnEl.removeEventListener('click', checkGuess)
     }
 }
 
@@ -107,9 +128,17 @@ function convertCurrentGuess() {
     } )
 }
 
-function deleteCurrentGuess() {
+function reset() {
+    wins = 0
+    loss = 0
+    memorySeqEl.innerText = `Press Start`
+    winMsgEl.innerText = ``
+    curGuesEl.innerText = ``
     currentGuess = []
     renderCurrentGuess()
+    startBtnEl.addEventListener('click', gameStart)
+    submitBtnEl.addEventListener('click', checkGuess)
+
 }
 
 function vanish() {
@@ -117,6 +146,4 @@ function vanish() {
     solSeqEl.innerText = "Press the buttons below"
 }
 
-
-
-console.log(solution)
+gameInit()

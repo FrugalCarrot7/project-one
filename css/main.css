@@ -76,6 +76,12 @@ h1 {
     margin: auto;
 }
 
+#current-guess {
+    display: flex;
+    margin: auto;
+    margin-top: 20px;
+}
+
 #submit {
     margin: auto;
     height: 25px;
