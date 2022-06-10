@@ -58,6 +58,8 @@ const CHOICES = 4
 
 
 // Functions
-//function for 
+1 function to process guess
+2 function to check answer
+3 functon to generate solution
 
 
