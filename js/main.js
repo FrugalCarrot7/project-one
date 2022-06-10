@@ -1,7 +1,7 @@
 /*----- constants -----*/
+
 const WINNING = 3
 const FAILEDGUESSES = 3
-
 
 /*----- app's state (variables) -----*/
 
@@ -20,13 +20,12 @@ const curGuesEl = document.getElementById('current-guess')
 
 /*----- event listeners -----*/
 
-
-
 startBtnEl.addEventListener('click', gameStart)
 submitBtnEl.addEventListener('click', checkGuess)
 resetBtnEl.addEventListener('click', reset)
 
 /*----- functions -----*/
+
 function gameInit() {
     wins = 0
     loss = 0
@@ -41,16 +40,12 @@ function gameStart() {
     renderSolution()
     setTimeout( vanish, 5000)
 }
-
-
 function getSolution() {
     for (let i=0; i<4; i++){
         let randomInt = Math.floor(Math.random()*4 + 1)
         solution[i] = randomInt
     }
 }
-
-
 function renderSolution() {
     solution.forEach(function(num){
         if(num === 1) {
@@ -64,10 +59,6 @@ function renderSolution() {
         }
     })
 }
-
-
-
-
 function logCurrentGuess(evt) {
     if (currentGuess.length === 4) {
         curGuesEl.innerText = `this is your current guess ${currentGuess} you cant do that!`
@@ -80,17 +71,15 @@ function logCurrentGuess(evt) {
     
     
 }
-
-
-
 function renderCurrentGuess() {
     curGuesEl.innerText = `YOUR GUESS ${currentGuess}`
 }
-
 function checkGuess() {
     convertCurrentGuess()
     if(answer[0] == solution[0] && 
-        answer[1] == solution[1] && answer[2] == solution[2] && answer[3] == solution[3]) {
+        answer[1] == solution[1] && 
+        answer[2] == solution[2] && 
+        answer[3] == solution[3]) {
         curGuesEl.innerText = `Correct`
         memorySeqEl.innerText = `Press Start for another code`
         wins += 1
@@ -107,7 +96,6 @@ function checkGuess() {
     solSeqEl.innerText = ``
     checkWin()
 }
-
 function checkWin() {
     if(wins === WINNING) {
         winMsgEl.innerText = `YOU WIN!`
@@ -120,14 +108,16 @@ function checkWin() {
         submitBtnEl.removeEventListener('click', checkGuess)
     }
 }
-
 function convertCurrentGuess() {
     answer = []
     currentGuess.forEach((num) => {
     answer.push(parseInt(num))    
     } )
 }
-
+function vanish() {
+    memorySeqEl.innerText = `Can you remember the code?`
+    solSeqEl.innerText = "Press the buttons below"
+}
 function reset() {
     wins = 0
     loss = 0
@@ -140,10 +130,4 @@ function reset() {
     submitBtnEl.addEventListener('click', checkGuess)
 
 }
-
-function vanish() {
-    memorySeqEl.innerText = `Can you remember the code?`
-    solSeqEl.innerText = "Press the buttons below"
-}
-
 gameInit()
